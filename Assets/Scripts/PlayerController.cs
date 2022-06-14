@@ -4,15 +4,45 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private float speed;
+
+    private enum EPlayerInputType
     {
-        
+        player1,
+        player2,
+        ai
+    };
+
+    [SerializeField]
+    private EPlayerInputType playerType;
+
+    private string vertAxis;
+
+    private void Start()
+    {
+        switch (playerType)
+        {
+            case EPlayerInputType.player1:
+                vertAxis = "Vertical";
+                break;
+            case EPlayerInputType.player2:
+                vertAxis = "Vertical2";
+                break;
+            case EPlayerInputType.ai:
+                break;
+            default:
+                break;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        float vertPos = Input.GetAxisRaw(vertAxis);
+
+        if (vertPos != 0)
+        {
+            transform.position += Vector3.up * (vertPos * speed * Time.deltaTime);
+        }
     }
 }

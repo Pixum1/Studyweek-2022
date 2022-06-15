@@ -53,7 +53,13 @@ public class BallBehaviour : MonoBehaviour
             rb.velocity = dir * speed;
             
         }
-        
+
+        Obstacle obstacle = _other.gameObject.GetComponent<Obstacle>();
+        if (obstacle != null)
+        {
+            obstacle.GetDamage();
+        }
+
     }
     private float hitFactor(Vector2 _ballPos, Vector2 _paddlePos ,float _racketHeight)
     {

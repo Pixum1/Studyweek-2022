@@ -22,8 +22,8 @@ public class Player : MonoBehaviour
 
 
     private void PlayerInput() 
-    { 
-        Input.GetKey(KeyCode.W)
+    {
+        Input.GetKey(KeyCode.W);
         
     
     }

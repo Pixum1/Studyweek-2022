@@ -3,28 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Main Menu References")]
     [SerializeField]
-    private GameManager gameManager;
+    private GameManager m_GameManager;
 
+    [Header("Character Selection References")]
     [SerializeField]
     private GameObject m_Player1InputSystem;
     [SerializeField]
     private GameObject m_Player2InputSystem;
-
     [SerializeField]
     private Button[] m_CharacterButtons;
 
     private bool player1Selected = false;
     private bool player2Selected = false;
 
+    [Header("InGame References")]
+    [SerializeField]
+    private RawImage m_Player1Character;
+    [SerializeField]
+    private RawImage m_Player2Character;
+
+    [Header("Game Over References")]
+    [SerializeField]
+    private TMP_Text m_PlayerWonText;
+    [SerializeField]
+    private RawImage m_WinningCharacter;
+    [SerializeField]
+    private RawImage m_LosingCharacter;
+
     public enum EScene
     {
         MainMenu,
         CharacterSelection,
-        InGame
+        InGame,
+        GameOver
     };
 
     [SerializeField]
@@ -32,7 +49,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        m_GameManager = FindObjectOfType<GameManager>();
 
         if (activeScene == EScene.CharacterSelection)
         {
@@ -46,14 +63,13 @@ public class UIManager : MonoBehaviour
     {
         if (activeScene == EScene.CharacterSelection)
         {
-
             if (player1Selected)
-                m_CharacterButtons[(int)gameManager.player1].interactable = false;
+                m_CharacterButtons[(int)m_GameManager.Player1Char].interactable = false;
             if (player2Selected)
-                m_CharacterButtons[(int)gameManager.player2].interactable = false;
+                m_CharacterButtons[(int)m_GameManager.Player2Char].interactable = false;
 
 
-            if (gameManager.player1 == GameManager.ECharacters.notSelected)
+            if (m_GameManager.Player1Char == GameManager.ECharacters.notSelected)
             {
                 player1Selected = false;
                 m_Player1InputSystem.SetActive(true);
@@ -61,12 +77,38 @@ public class UIManager : MonoBehaviour
 
                 return;
             }
-            else if (gameManager.player2 == GameManager.ECharacters.notSelected)
+            else if (m_GameManager.Player2Char == GameManager.ECharacters.notSelected)
             {
                 player2Selected = false;
                 m_Player1InputSystem.SetActive(false);
                 m_Player2InputSystem.SetActive(true);
                 return;
+            }
+        }
+        else if (activeScene == EScene.InGame)
+        {
+            if (m_GameManager.Player1.Health > 0 && m_GameManager.Player2.Health > 0)
+            {
+                m_Player1Character.texture = m_GameManager.Characters[(int)m_GameManager.Player1Char].CharacterSprites[m_GameManager.Player1.Health - 1];
+                m_Player2Character.texture = m_GameManager.Characters[(int)m_GameManager.Player2Char].CharacterSprites[m_GameManager.Player2.Health - 1];
+            }
+
+            //if game over delete gamemangaer and load scene 0
+        }
+        else if (activeScene == EScene.GameOver)
+        {
+            if (m_GameManager.Player2.Health <= 0)
+            {
+                m_WinningCharacter.texture = m_GameManager.Characters[(int)m_GameManager.Player1Char].CharacterSprites[m_GameManager.P1FinalHealth - 1];
+                m_LosingCharacter.texture = m_GameManager.Characters[(int)m_GameManager.Player2Char].CharacterSprites[0];
+                m_PlayerWonText.text = $"{m_GameManager.Characters[(int)m_GameManager.Player1Char].Name} won!";
+            }
+            else if (m_GameManager.Player1.Health <= 0)
+            {
+
+                m_WinningCharacter.texture = m_GameManager.Characters[(int)m_GameManager.Player2Char].CharacterSprites[m_GameManager.P2FinalHealth - 1];
+                m_LosingCharacter.texture = m_GameManager.Characters[(int)m_GameManager.Player1Char].CharacterSprites[0];
+                m_PlayerWonText.text = $"{m_GameManager.Characters[(int)m_GameManager.Player2Char].Name} won!";
             }
         }
     }
@@ -77,8 +119,8 @@ public class UIManager : MonoBehaviour
         {
             if (!player1Selected && !player2Selected)
             {
-                gameManager.player1 = (GameManager.ECharacters)_char;
-                Debug.Log($"Player 1 chose: {gameManager.player1}");
+                m_GameManager.Player1Char = (GameManager.ECharacters)_char;
+                Debug.Log($"Player 1 chose: {m_GameManager.Player1Char}");
                 player1Selected = true;
             }
         }
@@ -86,8 +128,8 @@ public class UIManager : MonoBehaviour
         {
             if (player1Selected && !player2Selected)
             {
-                gameManager.player2 = (GameManager.ECharacters)_char;
-                Debug.Log($"Player 2 chose: {gameManager.player2}");
+                m_GameManager.Player2Char = (GameManager.ECharacters)_char;
+                Debug.Log($"Player 2 chose: {m_GameManager.Player2Char}");
                 player2Selected = true;
             }
         }
@@ -95,6 +137,10 @@ public class UIManager : MonoBehaviour
 
     public void LoadScene(int _sceneIndex)
     {
-        SceneManager.LoadScene(_sceneIndex);   
+        if (activeScene == EScene.GameOver)
+        {
+            Destroy(m_GameManager.gameObject);
+        }
+        SceneManager.LoadScene(_sceneIndex);
     }
 }

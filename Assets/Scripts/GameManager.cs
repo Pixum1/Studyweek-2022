@@ -15,10 +15,18 @@ public class GameManager : MonoBehaviour
         char5
     };
 
-    public ECharacters player1;
-    public ECharacters player2;
+    public Character[] Characters;
 
-    public UIManager uimanager;
+    public ECharacters Player1Char = ECharacters.notSelected;
+    public ECharacters Player2Char = ECharacters.notSelected;
+
+    [HideInInspector] public PlayerController Player1;
+    [HideInInspector] public PlayerController Player2;
+
+    [HideInInspector] public int P1FinalHealth;
+    [HideInInspector] public int P2FinalHealth;
+
+    [HideInInspector] public UIManager UImanager;
 
     private void Start()
     {
@@ -27,16 +35,39 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(uimanager == null)
-            uimanager = FindObjectOfType<UIManager>();
+        if (UImanager == null)
+            UImanager = FindObjectOfType<UIManager>();
 
-        if (uimanager.activeScene == UIManager.EScene.CharacterSelection)
+        if (UImanager.activeScene == UIManager.EScene.CharacterSelection)
         {
-            if (player1 != ECharacters.notSelected && player2 != ECharacters.notSelected)
+            if (Player1Char != ECharacters.notSelected && Player2Char != ECharacters.notSelected)
             {
                 Debug.Log("All characters selected");
-                uimanager.LoadScene(2);
+                UImanager.LoadScene(2);
             }
         }
+        if (UImanager.activeScene == UIManager.EScene.InGame)
+        {
+            if (Player1 == null)
+                Player1 = GameObject.Find("Player1").GetComponent<PlayerController>();
+            if (Player2 == null)
+                Player2 = GameObject.Find("Player2").GetComponent<PlayerController>();
+
+            if (Player1.Health <= 0 || Player2.Health <= 0)
+            {
+                P1FinalHealth = Player1.Health;
+                P2FinalHealth = Player2.Health;
+                UImanager.LoadScene(3); //Load Game Over Scene
+            }
+        }
+    }
+
+    public void DamagePlayer1()
+    {
+        Player1.Health--;
+    }
+    public void DamagePlayer2()
+    {
+        Player2.Health--;
     }
 }

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Paddel
+  - Bounds
   layers:
   - Default
   - TransparentFX

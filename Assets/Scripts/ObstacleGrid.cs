@@ -14,7 +14,7 @@ public class ObstacleGrid : MonoBehaviour
     private int m_Width;
     private Cell[] cells;
     [SerializeField]
-    private Sprite m_Sprite;
+    private Sprite[] m_Sprites;
 
     private void Start()
     {
@@ -40,7 +40,7 @@ public class ObstacleGrid : MonoBehaviour
                 GameObject go = new GameObject("Cell: " + i);
                 go.transform.SetParent(this.transform);
                 cells[i].Obstacle = go.AddComponent<Obstacle>();
-                cells[i].Obstacle.Init(go, cells[i].Position, m_BlockSize, m_Sprite);
+                cells[i].Obstacle.Init(go, cells[i].Position, m_Sprites);
             }
         }
     }
@@ -58,7 +58,11 @@ public class ObstacleGrid : MonoBehaviour
                     cells[i].Obstacle.ActivateObstacle();
                     break;
                 case Cell.EStatus.dead:
-                    cells[i].Obstacle.DeactivateObstacle();
+                    if (!cells[i].Obstacle.CoroutineCalled)
+                    {
+                        cells[i].Obstacle.DeactivateObstacle();
+                        cells[i].Obstacle.StartCoroutine(cells[i].Obstacle.RespawnBlock(5f, cells[i]));
+                    }
                     break;
                 default:
                     break;

@@ -36,6 +36,10 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private RawImage m_LosingCharacter;
 
+    
+    public Animator Transitions;
+
+
     public enum EScene
     {
         MainMenu,
@@ -134,13 +138,26 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+    
 
     public void LoadScene(int _sceneIndex)
     {
+        StartCoroutine(Fadeing(_sceneIndex));
+        
+        
+        
+    }
+    IEnumerator Fadeing(int _sceneIndex) 
+    {   Transitions.SetTrigger("Start");
         if (activeScene == EScene.GameOver)
         {
             Destroy(m_GameManager.gameObject);
         }
+        
         SceneManager.LoadScene(_sceneIndex);
+        
+
+        yield return new WaitForSeconds(1);
+    
     }
 }

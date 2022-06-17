@@ -447,6 +447,9 @@ MonoBehaviour:
   - {fileID: 1032501164}
   m_Player1Character: {fileID: 0}
   m_Player2Character: {fileID: 0}
+  m_PlayerWonText: {fileID: 0}
+  m_WinningCharacter: {fileID: 0}
+  m_LosingCharacter: {fileID: 0}
   activeScene: 1
 --- !u!4 &380614892
 Transform:
@@ -1079,7 +1082,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6b192f761308e7d4ca6127bfd4d46603, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d280591bf5cd1c74a9d7379070414399, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
             switch (playerType)
             {
                 case EPlayerInputType.player1:
-                    if (Input.GetKeyDown(KeyCode.Space))
+                    if (Input.GetAxisRaw("Submit") != 0)
                     {
                         ballDocked = false;
                         ball.LaunchBall(Vector2.right);
@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
                     }
                     break;
                 case EPlayerInputType.player2:
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    if (Input.GetAxisRaw("Submit2") != 0)
                     {
                         ballDocked = false;
                         ball.LaunchBall(Vector2.left);

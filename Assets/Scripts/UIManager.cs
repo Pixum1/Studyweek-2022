@@ -126,7 +126,7 @@ public class UIManager : MonoBehaviour
 
     public void SelectCharacter(int _char)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetAxisRaw("Submit") != 0)
         {
             if (!player1Selected && !player2Selected)
             {
@@ -135,7 +135,7 @@ public class UIManager : MonoBehaviour
                 player1Selected = true;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Return))
+        else if (Input.GetAxisRaw("Submit2") != 0)
         {
             if (player1Selected && !player2Selected)
             {

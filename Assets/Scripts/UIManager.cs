@@ -24,6 +24,8 @@ public class UIManager : MonoBehaviour
 
     [Header("InGame References")]
     [SerializeField]
+    private TMP_Text m_Countdown;
+    [SerializeField]
     private RawImage m_Player1Character;
     [SerializeField]
     private RawImage m_Player2Character;
@@ -36,8 +38,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private RawImage m_LosingCharacter;
 
-    
-    public Animator Transitions;
+    [Header("Scene Transition References")]
+    [SerializeField]
+    private Animator m_Transitions;
 
 
     public enum EScene
@@ -61,6 +64,10 @@ public class UIManager : MonoBehaviour
             m_Player2InputSystem.SetActive(false);
         }
 
+        if(activeScene == EScene.InGame)
+        {
+            StartCoroutine(Countdown());
+        }
     }
 
     private void Update()
@@ -143,21 +150,34 @@ public class UIManager : MonoBehaviour
     public void LoadScene(int _sceneIndex)
     {
         StartCoroutine(Fadeing(_sceneIndex));
-        
-        
-        
     }
     IEnumerator Fadeing(int _sceneIndex) 
-    {   Transitions.SetTrigger("Start");
+    {
         if (activeScene == EScene.GameOver)
         {
             Destroy(m_GameManager.gameObject);
         }
-        
-        SceneManager.LoadScene(_sceneIndex);
-        
 
-        yield return new WaitForSeconds(1);
-    
+        Time.timeScale = 0;
+
+        m_Transitions.SetTrigger("Start");
+
+        SceneManager.LoadScene(_sceneIndex);
+        yield return new WaitForSecondsRealtime(1);
+        Time.timeScale = 1;
+    }
+    private IEnumerator Countdown()
+    {
+        Time.timeScale = 0;
+        m_Countdown.text = "3";
+        yield return new WaitForSecondsRealtime(1f);
+        m_Countdown.text = "2";
+        yield return new WaitForSecondsRealtime(1f);
+        m_Countdown.text = "1";
+        yield return new WaitForSecondsRealtime(1f);
+        m_Countdown.text = "GO!";
+        yield return new WaitForSecondsRealtime(1f);
+        Time.timeScale = 1;
+        m_Countdown.text = "";
     }
 }

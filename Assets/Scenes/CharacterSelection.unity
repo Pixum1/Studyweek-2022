@@ -445,12 +445,13 @@ MonoBehaviour:
   - {fileID: 793624117}
   - {fileID: 462988864}
   - {fileID: 1032501164}
+  m_Countdown: {fileID: 0}
   m_Player1Character: {fileID: 0}
   m_Player2Character: {fileID: 0}
   m_PlayerWonText: {fileID: 0}
   m_WinningCharacter: {fileID: 0}
   m_LosingCharacter: {fileID: 0}
-  Transitions: {fileID: 0}
+  m_Transitions: {fileID: 479742878}
   activeScene: 1
 --- !u!4 &380614892
 Transform:
@@ -664,7 +665,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: c058b21914508d44d88f76b8f1b49664, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0

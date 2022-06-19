@@ -51,11 +51,17 @@ public class PlayerController : MonoBehaviour
         {
             case EPlayerInputType.player1:
                 vertAxis = "Vertical";
-                ballDockPosX = this.transform.position.x + this.transform.localScale.x + .1f;
+                ballDockPosX = this.transform.position.x + this.transform.localScale.x + .1f; 
+                ballDocked = false;
+                ball.LaunchBall(Vector2.right);
+                ball = null;
                 break;
             case EPlayerInputType.player2:
                 vertAxis = "Vertical2";
                 ballDockPosX = this.transform.position.x - this.transform.localScale.x - .1f;
+                ballDocked = false;
+                ball.LaunchBall(Vector2.left);
+                ball = null;
                 break;
             default:
                 break;
@@ -75,7 +81,7 @@ public class PlayerController : MonoBehaviour
             switch (playerType)
             {
                 case EPlayerInputType.player1:
-                    if (Input.GetAxisRaw("Submit") != 0)
+                    if (Input.GetAxisRaw("Submit") == 1)
                     {
                         ballDocked = false;
                         ball.LaunchBall(Vector2.right);
@@ -83,7 +89,7 @@ public class PlayerController : MonoBehaviour
                     }
                     break;
                 case EPlayerInputType.player2:
-                    if (Input.GetAxisRaw("Submit2") != 0)
+                    if (Input.GetAxisRaw("Submit2") == 1)
                     {
                         ballDocked = false;
                         ball.LaunchBall(Vector2.left);

@@ -24,6 +24,21 @@ public class BallBehaviour : MonoBehaviour
         spr.sprite = Sprite;
     }
 
+    private void Update()
+    {
+        Debug.Log(rb.velocity.magnitude);
+
+        if(rb.velocity.magnitude < speed)
+        {
+            rb.velocity = rb.velocity.normalized * speed;
+        }
+        if (rb.velocity.magnitude > speed)
+        {
+            rb.velocity = rb.velocity.normalized * speed;
+        }
+    }
+
+
     public void LaunchBall(Vector2 _dir)
     {
         rb.velocity = _dir.normalized;

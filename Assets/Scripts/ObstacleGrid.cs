@@ -61,7 +61,7 @@ public class ObstacleGrid : MonoBehaviour
                     if (!cells[i].Obstacle.CoroutineCalled)
                     {
                         cells[i].Obstacle.DeactivateObstacle();
-                        cells[i].Obstacle.StartCoroutine(cells[i].Obstacle.RespawnBlock(5f, cells[i]));
+                        cells[i].Obstacle.StartCoroutine(cells[i].Obstacle.RespawnBlock(7f, cells[i]));
                     }
                     break;
                 default:

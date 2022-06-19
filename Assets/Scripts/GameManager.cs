@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
         char2,
         char3,
         char4,
-        char5
+        char5,
+        char6
     };
 
     public Character[] Characters;
@@ -65,9 +66,11 @@ public class GameManager : MonoBehaviour
     public void DamagePlayer1()
     {
         Player1.Health--;
+        UImanager.m_Player1Animator.SetTrigger("damaged");
     }
     public void DamagePlayer2()
     {
         Player2.Health--;
+        UImanager.m_Player2Animator.SetTrigger("damaged");
     }
 }

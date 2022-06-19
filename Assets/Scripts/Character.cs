@@ -6,6 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Character", fileName = "New Character")]
 public class Character : ScriptableObject
 {
-    public string Name;
+    public Texture CharacterDeadSprite;
     public Texture[] CharacterSprites;
 }

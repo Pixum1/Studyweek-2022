@@ -29,6 +29,8 @@ public class UIManager : MonoBehaviour
     private RawImage m_Player1Character;
     [SerializeField]
     private RawImage m_Player2Character;
+    public Animator m_Player1Animator;
+    public Animator m_Player2Animator;
 
     [Header("Game Over References")]
     [SerializeField]
@@ -111,15 +113,15 @@ public class UIManager : MonoBehaviour
             if (m_GameManager.Player2.Health <= 0)
             {
                 m_WinningCharacter.texture = m_GameManager.Characters[(int)m_GameManager.Player1Char].CharacterSprites[m_GameManager.P1FinalHealth - 1];
-                m_LosingCharacter.texture = m_GameManager.Characters[(int)m_GameManager.Player2Char].CharacterSprites[0];
-                m_PlayerWonText.text = $"{m_GameManager.Characters[(int)m_GameManager.Player1Char].Name} won!";
+                m_LosingCharacter.texture = m_GameManager.Characters[(int)m_GameManager.Player2Char].CharacterDeadSprite;
+                m_PlayerWonText.text = $"Player 1 won!";
             }
             else if (m_GameManager.Player1.Health <= 0)
             {
 
                 m_WinningCharacter.texture = m_GameManager.Characters[(int)m_GameManager.Player2Char].CharacterSprites[m_GameManager.P2FinalHealth - 1];
-                m_LosingCharacter.texture = m_GameManager.Characters[(int)m_GameManager.Player1Char].CharacterSprites[0];
-                m_PlayerWonText.text = $"{m_GameManager.Characters[(int)m_GameManager.Player2Char].Name} won!";
+                m_LosingCharacter.texture = m_GameManager.Characters[(int)m_GameManager.Player1Char].CharacterDeadSprite;
+                m_PlayerWonText.text = $"Player 2 won!";
             }
         }
     }

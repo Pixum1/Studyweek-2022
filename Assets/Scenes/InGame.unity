@@ -595,7 +595,6 @@ MonoBehaviour:
   m_Height: 5
   m_Width: 5
   m_Sprites:
-  - {fileID: 21300000, guid: 3668403ceb6f3f94da060850be74dbcd, type: 3}
   - {fileID: 21300000, guid: eba3d1ba49d66b949a3c20d08a7641c1, type: 3}
   - {fileID: 21300000, guid: f90a812d6480d854aabf257246011cfd, type: 3}
 --- !u!4 &512550588
@@ -1390,7 +1389,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7d8e71b1db49bdc48bb945350999a96d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -1542,6 +1541,8 @@ MonoBehaviour:
   m_Countdown: {fileID: 22985475}
   m_Player1Character: {fileID: 1247381961}
   m_Player2Character: {fileID: 1139471099}
+  m_Player1Animator: {fileID: 1247381963}
+  m_Player2Animator: {fileID: 1139471101}
   m_PlayerWonText: {fileID: 0}
   m_WinningCharacter: {fileID: 0}
   m_LosingCharacter: {fileID: 0}

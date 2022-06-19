@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: tbd
   CharacterSprites:
-  - {fileID: 2800000, guid: 00cf74aea58ecc34ebd58871e1043c3d, type: 3}
-  - {fileID: 2800000, guid: c319e91cb17c324429cdc0e790ba8b69, type: 3}
-  - {fileID: 2800000, guid: f22dbce66aeb9f841b88a5b91671ac23, type: 3}
+  - {fileID: 2800000, guid: df8cabed3e2f9064cb48dc2bc17143f5, type: 3}
+  - {fileID: 2800000, guid: 676d82c38a88665408ad4824b36baef5, type: 3}
+  - {fileID: 2800000, guid: efadd197b1dd24b4d83850b3d836e656, type: 3}

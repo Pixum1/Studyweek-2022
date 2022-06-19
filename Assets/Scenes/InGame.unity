@@ -595,9 +595,9 @@ MonoBehaviour:
   m_Height: 5
   m_Width: 5
   m_Sprites:
-  - {fileID: 21300000, guid: 00cf74aea58ecc34ebd58871e1043c3d, type: 3}
-  - {fileID: 21300000, guid: c319e91cb17c324429cdc0e790ba8b69, type: 3}
-  - {fileID: 21300000, guid: f22dbce66aeb9f841b88a5b91671ac23, type: 3}
+  - {fileID: 21300000, guid: 3668403ceb6f3f94da060850be74dbcd, type: 3}
+  - {fileID: 21300000, guid: eba3d1ba49d66b949a3c20d08a7641c1, type: 3}
+  - {fileID: 21300000, guid: f90a812d6480d854aabf257246011cfd, type: 3}
 --- !u!4 &512550588
 Transform:
   m_ObjectHideFlags: 0

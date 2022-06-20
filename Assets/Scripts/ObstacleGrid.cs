@@ -15,6 +15,8 @@ public class ObstacleGrid : MonoBehaviour
     private Cell[] cells;
     [SerializeField]
     private Sprite[] m_Sprites;
+    [SerializeField]
+    private float m_CellRespawnTime = 10f;
 
     private void Start()
     {
@@ -61,7 +63,7 @@ public class ObstacleGrid : MonoBehaviour
                     if (!cells[i].Obstacle.CoroutineCalled)
                     {
                         cells[i].Obstacle.DeactivateObstacle();
-                        cells[i].Obstacle.StartCoroutine(cells[i].Obstacle.RespawnBlock(7f, cells[i]));
+                        cells[i].Obstacle.StartCoroutine(cells[i].Obstacle.RespawnBlock(m_CellRespawnTime, cells[i]));
                     }
                     break;
                 default:
